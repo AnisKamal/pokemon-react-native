@@ -6,17 +6,19 @@ import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
+import { View, Text } from 'react-native'
 
 export default function HomeScreen() {
   return (
-  <View
-      style={{
-        flex: 1,
-        justifyContent: "center", 
-        alignItems: "center"
-      }}
-  >
-    <Text>text view</Text>
+
+  <View style={styles.container}>
+      <Text> exemple text </Text>
+      <Link href="/about"> A propos </Link>
+      <Link href={{pathname: '/pokemon/[id]', params: {id: 3}}}> Pokemon 3 </Link>
   </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {backgroundColor: '#FF0000', padding: 24}
+})
