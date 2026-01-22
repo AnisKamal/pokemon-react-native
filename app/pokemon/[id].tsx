@@ -1,8 +1,8 @@
 import {Text, View} from "react-native";
-import {useLocaleSearchParams} from "expo-router";
+import {useLocalSearchParams} from "expo-router";
 
 export default function Pokemon(){
-  const params = useLocaleSearchParams();
+  const params = useLocalSearchParams();
   return (<View>
       <Text> Pokemon  {params.id} </Text>
   </View>)
