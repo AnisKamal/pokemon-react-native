@@ -5,6 +5,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
+import {PokemonCard} from "@/components/pokemon/PokemonCard";
 
 export default function HomeScreen() {
 
@@ -26,9 +27,7 @@ export default function HomeScreen() {
           numColumns={3}
           contentContainerStyle={[styles.gridGap, styles.list]}
           renderItem={({item}) =>
-            <Card style={{flex : 1/3, height: 200}}>
-              <Text> {item.name} </Text>
-            </Card> } 
+            <PokemonCard id={item.id} name={item.name} style={{flex: 1/3,  height: 200}} />  }
             keyExtractor={(item) => item.id.toString()}
           />
 
