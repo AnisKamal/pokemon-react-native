@@ -6,14 +6,14 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import {PokemonCard} from "@/components/pokemon/PokemonCard";
-import {useFetchQuery} from "@/hooks/useFetchQuery";
+import {useFetchQuery, useInfiniteFetchQuery} from "@/hooks/useFetchQuery";
 import {getPokemonId} from "@/functions/getPokemonId";
 
 export default function HomeScreen() {
 
     const colors = useThemeColors();
-    const {data, isFetching} = useFetchQuery('/pokemon?limit=21')
-    const pokemons = data?.results ?? [];
+    const {data, isFetching, fetchNextPage} = useInfiniteFetchQuery('/pokemon?limit=21')
+    const pokemons = data?.pages.flatMap(page => page.results) ?? [];
     /*const pokemons = Array.from({length: 35}, (_, k) => ({
       name: 'pokemon name',
       id: k + 1
@@ -33,6 +33,7 @@ export default function HomeScreen() {
           ListFooterComponent={
               isFetching ? <ActivityIndicator color={colors.tint} /> : null
           }
+          onEndReached={() => fetchNextPage()}
           renderItem={({item}) =>
             <PokemonCard id={getPokemonId(item.url)} name={item.name} style={{flex: 1/3,  height: 200}} />  }
             keyExtractor={(item) => item.url}
